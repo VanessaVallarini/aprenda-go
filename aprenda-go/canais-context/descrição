@@ -1,0 +1,18 @@
+Context
+
+Imagina que eu tenho um site (netflix) e o usuário pesquisou por um filme
+eu tenho vários bancos de dados, 1 pra séries, 1 pra filmes...
+Aí eu tenho várias go rotinas que vai buscando cada uma em um banco de dados 
+O usuário já saiu da tela de pesquisa, antes de finalizar a excução de todas as go rotinas 
+E eu ainda estou executando as gorotinas 
+Aí o legal é eu matar essas go rotinas 
+E pra como eu informo a go rotina? Com context -> troca de mensagens entre go rotinas 
+Documentação: https://golang.org/pkg/context/
+Aos aventureiros: https://blog.golang.org/context
+Destaques:
+ctx := context.Background -> base do context
+ctx, cancel = context.WithCancel(context.Background) -> cancelamento da go rotina
+goroutine: select case ←ctx.Done(): return; default: continua trabalhando. 
+-> qd do o cancel na gorotina ela recebe um Done, posso usar isso no select e dar um return para matar a go rotina
+check ctx.Err(); -> ver o que tem no contexto (o que foi cancelado)
+Tambem tem WithDeadline/Timeout -> quando iniciou e qd morreu
